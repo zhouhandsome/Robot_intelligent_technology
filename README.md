@@ -3,10 +3,10 @@
 ## 创建工作空间
 
 ```bash
-      cd ~/    # 切换到主目录文件夹
-      mkdir -p catkin_ws/src  # 创建工作空间，src用于保存功能包和代码
-      cd ~/catkin_ws # 切换到工作空间目录下
-      catkin_make # ros编译，编译后会生成一系列编译文件
+cd ~/    # 切换到主目录文件夹
+mkdir -p catkin_ws/src  # 创建工作空间，src用于保存功能包和代码
+cd ~/catkin_ws # 切换到工作空间目录下
+catkin_make # ros编译，编译后会生成一系列编译文件
 ```
 ## 下载代码到本地
 
@@ -51,6 +51,12 @@ roslaunch mrobot_description slam_map.launch
 
 ```bash
 rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+
+```
+### 保存地图
+
+```bash
+roslaunch mrobot_description save_map.launch
 
 ```
 ## 导航
