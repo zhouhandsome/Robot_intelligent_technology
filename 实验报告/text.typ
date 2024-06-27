@@ -392,6 +392,8 @@ ROS 内置了一些小程序，可以通过运行这些小程序以检测 ROS �
 用于Gazebo仿真环境。它包括基础结构、主体、顶部、后部、头部和前部链接，以及激光雷达和Kinect v2传感器。每个链接都有视觉、碰撞和惯性属性，关节定义了它们之间的固定连接。
 
 Gazebo插件用于模拟机器人的移动和传感器输出，IMU传感器提供角速度和加速度数据。整个模型通过精细的组件和传感器配置，模拟了一个具有高度复杂性和功能性的机器人。
+
+进入urdf文件所属目录，调用:urdf_to_graphiz urdf文件，当前目录下会生成 pdf 文件
 机器人的的节点描述如下：
 #figure(
   grid(
@@ -419,7 +421,7 @@ roslaunch mrobot_description my_robot.launch
 )
 )
 ==== 4.4.2 搭建Gazebo仿真环境
-
+\
 在gazebo_test.launch中编写了加载Gazebo环境的xml代码，打开终端输入：
 ```bash
 source ~/catkin_ws/devel/setup.bash
@@ -492,7 +494,7 @@ rosrun teleop_twist_keyboard teleop_twist_keyboard.py
       image(".\image\4\14最终地图效果.png",format: "png",width: 85%) ,
 )
 )
-编写地图保存launch文件
+编写地图保存save_map.launch文件
 ```xml
 <launch>
     <arg name="filename" value="$(find mrobot_description)/map/my_map" />
@@ -536,8 +538,23 @@ roslaunch mrobot_description robot_navigation.launch
 )
 )
 在上图中机器人周围绿色的部分是局部地图路径规划的结果,红色线是全局路径规划的结果.
-使用其他的导航功能包实现
 == 五、实验结果分析（代码上传至互联网并给出链接）
 
+github链接如下
+```url
+https://github.com/zhouhandsome/Robot_intelligent_technology.git
+```
+\
 
+实验结果证实了机器人仿真系统的成功搭建，SLAM技术在地图创建方面表现卓越，同时，机器人导航定位的准确性也达到了极高水准。这一系列成功的实验不仅展示了机器人在复杂环境中的导航能力，也为未来在实际应用中的进一步研究和开发奠定了坚实的基础。
 == 六、结论与展望
+\
+=== 6.1 结论
+\
+
+在本次实验中，我成功地搭建了一个机器人仿真系统，并通过SLAM技术实现了高效准确的地图创建。机器人导航定位的精度极高，显示出了系统在复杂环境中的稳定性和可靠性。通过ROS的Navigation Stack，特别是move_base节点的集成，我们实现了精确的路径规划和动态避障。实验过程中，我深入探讨了成本地图的构建、传感器数据的融合以及参数优化等多个关键技术点，确保了机器人导航系统的高效运行。
+
+=== 6.1 展望
+\
+
+尽管当前的实验成果令人满意，但我认识到机器人导航技术仍有进步空间。未来，我计划进一步优化算法，提高系统对动态环境变化的适应性和鲁棒性。此外，我也将探索多机器人协同工作的场景，以及如何通过机器学习技术提升机器人的自主决策能力。长远来看，我期望将这些研究成果转化为实际应用，为自动化物流、室内服务、灾难救援等领域提供技术支持，推动智能机器人技术的创新发展。

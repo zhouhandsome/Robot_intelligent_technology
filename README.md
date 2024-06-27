@@ -1,97 +1,61 @@
-slam必考，计算基础原题
+# 实验教程
 
-SLAM的基本步骤是什么：
-	初始定位
-	运动预测
-	数据获取
-	特征提取与匹配
-	建图===》数据关联，对其
-	优化
-	回环检测
-	定位更新
-	局部路径规划和全局路径规划
-	循环
-	
+## 创建工作空间
 
-计算题  两轮差速底盘模型运动学差速方程
-				
+```bash
+      cd ~/    # 切换到主目录文件夹
+      mkdir -p catkin_ws/src  # 创建工作空间，src用于保存功能包和代码
+      cd ~/catkin_ws # 切换到工作空间目录下
+      catkin_make # ros编译，编译后会生成一系列编译文件
+```
+## 下载代码到本地
 
-车轮转速
+```bash
+cd ~/catkin_ws/src
+git clone https://github.com/zhouhandsome/Robot_intelligent_technology.git
 
-1、机器人系统的硬件选型，一般从哪几方面考虑
+```
+安装依赖项
+```bash
+cd ~/catkin_ws/src/Robot_intelligent_technology/code
+install_for_noetic.sh
+```
+## 编译
 
-	功能与需求
-	性能与精度
-	可靠性与耐用性
-	尺寸与重量
-	成本与可行性
+```bash
+cd ~/catkin_ws
+catkin_make
+```
+## 查看机器人
 
-2、从控制角度简述机器人系统的组成，以及各部分之间的关系
+```bash
+cd ~/catkin_ws
+source ~/catkin_ws/devel/setup.bash
+roslaunch mrobot_description my_robot.launch
+```
+## 查看gazebo仿真环境
 
-	感知系统
-	控制系统
-	执行系统
-	动力与电力系统
-	通信系统
-	
-3、简述机器人常用的传感器有哪些，他们各自的作用是什么？
+```bash
+cd ~/catkin_ws
+source ~/catkin_ws/devel/setup.bash
+roslaunch mrobot_description gazebo_test.launch
+```
+## slam建图
+### 启动仿真环境和slam建图节点
+```bash
+cd ~/catkin_ws
+source ~/catkin_ws/devel/setup.bash
+roslaunch mrobot_description slam_map.launch
+```
+### 启动键盘控制节点
 
-	视觉，激光，触觉，力反馈，声音，距离，温度，
-4、介绍激光雷达的优缺点，简述单线激光雷达和多线激光雷达的区别
-	优点：高精度，大范围，速度快，高分辨率，强适应性
-	缺点：体积大，成本高，数据点稀疏
-	单线：一次只能发射一条激光线，通过旋转的方式采集数据，不能直接采集垂直方向的信息，需要通过旋转或者扫描的方式，成本低
-	多线：同时发射多个激光线，可以在一次扫描中获得更多的距离数据。可以在水平和垂直的方向上同时获得数据，从而提供更丰富的环境信息。采样速度高，可以实时获得大量数据点，但成本相对较高
+```bash
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 
-5、在测量物体深度信息时、RGB-D相机有哪些测量方式？有什么优缺点？其原理与双目相机测量原理有什么区别？
-
-	RGB-D，
-		时间飞行
-		结构光
-	与双目相机的区别
-		视差计算上
-		测量范围   双目近距离，RGB-D远距离
-		速度和精度   速度和精度不能同时满足
-
-	
-6、ROS操作系统
-	功能包组成部分
-		节点
-		消息
-		服务
-		动作
-		参数
-		启动文件
-		
-	工作空间框架
-		src
-		build
-		devel
-		install
-		CMakeList.txt
-		package.xml
-		setup.bash
-
-	通信机制
-		简述主题和服务的区别
-			主题：发布者-订阅者模式，一对多，异步
-			服务：服务端-处理端模式，一对一，同步
-	节点，如何运行一个节点
-	坐标变换的含义？举例说明在哪些机器人应用场景中可能会使用到坐标变换。
-		将坐标系中的点变换到另一个坐标系
-		机械臂控制
-		多传感器融合
-		移动机器人定位与导航
-	ROS外接设备有哪些？与机器人控制器通信时，使用到了那种ROS通信机制？
-	机器人仿真环境Gazebo和rviz
-		什么是URDF,其由哪些标签组成
-		如何通过roslaunch把URDF模型加载到Gazebo中
-	ROS1和ROS2在编程上有什么区别？
-7、激光雷达消息类型sensor_msgs/LaserScan的消息格式是什么？
-
-8、全局路径规划与局部路径规划的区别是什么？
-
-9、ROS导航框架为机器人定位、建图提供了什么
-	
-	
-	
+```
+## 导航
+```bash
+cd ~/catkin_ws
+source ~/catkin_ws/devel/setup.bash
+roslaunch mrobot_description robot_navigation.launch
+```
