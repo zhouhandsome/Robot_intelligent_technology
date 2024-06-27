@@ -1,0 +1,19 @@
+<launch>
+  <!-- tf 载入 机器人-->
+  <arg name="model" default="$(find mrobot_description)/models/wpb_home.model"/>
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <!-- joy node -->
+  <!-- 载入 RoboCup@Home 的仿真场景 -->
+  <include file="$(find mrobot_description)/launch/gazebo_test.launch"/>
+
+  <!-- Gmapping -->
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping"/>
+
+  <!-- Rviz -->
+  <arg name="rvizconfig" default="$(find mrobot_description)/rviz/slam.rviz" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+
+</launch>

@@ -1,0 +1,44 @@
+digraph G {
+node [shape=box];
+"base_footprint" [label="base_footprint"];
+"base_link" [label="base_link"];
+"body_link" [label="body_link"];
+"base_top_link" [label="base_top_link"];
+"body_back_link" [label="body_back_link"];
+"front_link" [label="front_link"];
+"head_link" [label="head_link"];
+"kinect2_dock" [label="kinect2_dock"];
+"kinect2_head_frame" [label="kinect2_head_frame"];
+"kinect2_front_frame" [label="kinect2_front_frame"];
+"kinect2_ir_optical_frame" [label="kinect2_ir_optical_frame"];
+"kinect2_camera_frame" [label="kinect2_camera_frame"];
+"kinect2_rgb_optical_frame" [label="kinect2_rgb_optical_frame"];
+"laser" [label="laser"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"base_footprint" -> "base_joint" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"base_joint" -> "base_link"
+"base_link" -> "base_to_body" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"base_to_body" -> "body_link"
+"body_link" -> "body_to_top" [label="xyz: 0.01 0 0.2 \nrpy: 0 -0 0"]
+"body_to_top" -> "base_top_link"
+"base_top_link" -> "body_to_back" [label="xyz: -0.038 0 0.5 \nrpy: 0 0.31 0"]
+"body_to_back" -> "body_back_link"
+"base_top_link" -> "body_to_front" [label="xyz: 0.15 0 0.55 \nrpy: 0 -0 0"]
+"body_to_front" -> "front_link"
+"base_top_link" -> "body_to_head" [label="xyz: 0.155 0 1.17 \nrpy: 0 0.27 0"]
+"body_to_head" -> "head_link"
+"base_link" -> "kinect_height" [label="xyz: 0.145 -0.013 1.37 \nrpy: 0 -0 0"]
+"kinect_height" -> "kinect2_dock"
+"kinect2_dock" -> "kinect_pitch" [label="xyz: 0 0 0 \nrpy: 0 0.5 0"]
+"kinect_pitch" -> "kinect2_head_frame"
+"kinect2_head_frame" -> "kinect_head" [label="xyz: 0 0 0 \nrpy: 0 1.5708 -0"]
+"kinect_head" -> "kinect2_front_frame"
+"kinect2_front_frame" -> "kinect_ir_trans" [label="xyz: 0 0 0 \nrpy: 0 0 -1.57"]
+"kinect_ir_trans" -> "kinect2_ir_optical_frame"
+"kinect2_ir_optical_frame" -> "kinect_camra_joint" [label="xyz: 0 0 0 \nrpy: 3.14159 3.30872e-24 -1.5708"]
+"kinect_camra_joint" -> "kinect2_camera_frame"
+"kinect2_camera_frame" -> "kinect_hd_joint" [label="xyz: 0 0 0 \nrpy: 0 1.5708 -0"]
+"kinect_hd_joint" -> "kinect2_rgb_optical_frame"
+"base_link" -> "laser_joint" [label="xyz: 0 0 0.15 \nrpy: 0 -0 0"]
+"laser_joint" -> "laser"
+}
