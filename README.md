@@ -18,7 +18,7 @@ git clone https://github.com/zhouhandsome/Robot_intelligent_technology.git
 安装依赖项
 ```bash
 cd ~/catkin_ws/src/Robot_intelligent_technology/code
-install_for_noetic.sh
+sh ./install_for_noetic.sh
 ```
 ## 编译
 

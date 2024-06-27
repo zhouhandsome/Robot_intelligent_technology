@@ -2,7 +2,7 @@
     <!-- 将 urdf 文件内容设置进参数服务器 -->
     <param name="robot_description" textfile="$(find mrobot_description)/models/wpb_home.model" />_
     <!-- 启动 rivz -->
-    <node pkg="rviz" type="rviz" name="rviz"  args="-d $(find mrobot_description)/config/rviz/show_basefoot_link.rviz"/>
+    <node pkg="rviz" type="rviz" name="rviz"  args="-d $(find mrobot_description)/rviz/grab.rviz"/>
     <!-- 启动机器人状态和关节状态发布节点 -->
     <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher" />
     <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
